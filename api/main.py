@@ -36,6 +36,6 @@ app.include_router(scrape_router)
 app.mount("/static", StaticFiles(directory=DATA_DIR), name="static")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     multiprocessing.freeze_support()
     uvicorn.run(app, host="127.0.0.1", port=8000)

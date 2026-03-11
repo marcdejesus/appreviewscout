@@ -7,6 +7,15 @@ def test_list_projects_empty(client) -> None:
     assert response.json() == []
 
 
+def test_create_project_rejects_empty_name(client) -> None:
+    response = client.post(
+        "/projects",
+        json={"name": "   ", "description": "A test project"},
+    )
+    assert response.status_code == 400
+    assert "required" in response.json()["detail"].lower()
+
+
 def test_create_project(client) -> None:
     response = client.post(
         "/projects",
@@ -68,6 +77,18 @@ def test_update_project(client) -> None:
 def test_update_project_404(client) -> None:
     response = client.patch("/projects/99999", json={"name": "X"})
     assert response.status_code == 404
+
+
+def test_update_project_rejects_empty_name(client) -> None:
+    create_resp = client.post("/projects", json={"name": "Original"})
+    assert create_resp.status_code == 200
+    pid = create_resp.json()["id"]
+    response = client.patch(
+        f"/projects/{pid}",
+        json={"name": "   "},
+    )
+    assert response.status_code == 400
+    assert "non-empty" in response.json()["detail"].lower()
 
 
 def test_delete_project(client) -> None:

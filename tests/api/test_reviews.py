@@ -95,3 +95,12 @@ def test_feature_requests_filtered_by_project_id(client, seed_db) -> None:
     assert response.status_code == 200
     rows = response.json()
     assert len(rows) == 1
+
+
+def test_update_review_pin_404_when_review_not_found(client) -> None:
+    response = client.patch(
+        "/reviews/99999/pin",
+        json={"pinned": True},
+    )
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Review not found"
