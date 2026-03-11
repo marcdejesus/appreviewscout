@@ -29,9 +29,9 @@ htmlcov/
 data/*.db
 *.db-journal
 
-# App icons (contents ignored; folder kept via app_icons/.gitkeep)
+# App icons (contents ignored; folder kept via data/app_icons/.gitkeep)
 data/app_icons/*
-!app_icons/.gitkeep
+!data/app_icons/.gitkeep
 
 # OS
 .DS_Store
