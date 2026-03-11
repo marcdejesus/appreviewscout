@@ -15,9 +15,9 @@ The Flutter app talks to the API over `localhost`. On launch it starts the bundl
 
 ```
 api/                 # FastAPI app (apps, reviews, projects, scrape routes)
+api/procedures/          # DB and scraping logic
 appreviewscout/       # Flutter desktop app
 data/                # SQLite database (local)
-procedures/          # DB and scraping logic
 tests/               # API tests (pytest)
 ```
 
